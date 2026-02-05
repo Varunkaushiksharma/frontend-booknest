@@ -1,0 +1,24 @@
+html{
+    scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
+}
+#root{
+    background-color: white;
+}
+body{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+.butt{
+    width: 52px;
+    height: 34px;
+    padding: 3px;
+    margin: 8px;
+    background-color: aliceblue;
+}
+.side{
+    width: 100%;
+    height: 100%;
+}
