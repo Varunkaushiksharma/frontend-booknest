@@ -151,7 +151,7 @@ export default function Account() {
           {formData.imageUrl && (
             <div className="image-preview">
              <img
-              src={`${import.meta.env.VITE_API_BASE_URL}${formData.imageUrl}`}
+              src={`${import.meta.env.VITE_API_BASE_URL.replace('/api','')}${formData.imageUrl}`}
               alt="Book preview"
               className="preview-img"
             />

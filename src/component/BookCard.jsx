@@ -16,7 +16,7 @@ export default function BookCard({
 }) {
    // Build correct image URL
   const imageUrl = book.imageUrl
-    ? `https://booknest-backend-cv58.onrender.com/${book.imageUrl}`
+    ? `${import.meta.env.VITE_API_BASE_URL.replace('/api','')}${book.imageUrl}`
     : defaultImage;
   return (
     <div className="book-card">
