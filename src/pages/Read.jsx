@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios"; // Assuming you have an api.js for axios instance
 import './Read.css'
 import Navbar from "../component/Navbar";
 
@@ -12,11 +12,7 @@ export default function Read() {
 
   useEffect(() => {
   const token = localStorage.getItem("token");
-  axios.get(`http://localhost:8080/api/books/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  api.get(`/books/${id}`)
   .then(res => {
     setBook(res.data);
     setLoading(false);

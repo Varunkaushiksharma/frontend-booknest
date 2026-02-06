@@ -16,15 +16,10 @@ export default function BookCard({
 }) {
   return (
     <div className="book-card">
-    <img
-        src={
-          book.imageUrl
-            ? `http://localhost:8080/${book.imageUrl.replace(/^\//, "")}`
-            : defaultImage
-        }
-        alt={`Cover of ${book.name}`}
-        className="book-cover"
-      />
+   <img
+      src={`${import.meta.env.VITE_API_BASE_URL}${book.imageUrl}`}
+      alt={book.name}
+    />
       {console.log("Book image URL:", book.imageUrl)}       
       <div className="book-info">
         <h3 className="book-name">{book.name}</h3>

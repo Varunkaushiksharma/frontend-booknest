@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../component/Navbar";
-import axios from "axios";
+import api from "../api/axios";
 import BookCard from "../component/BookCard";
 import './BookList.css'
 
@@ -10,7 +10,7 @@ export default function Books(){
     const[name,setname] = useState("")
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/books")
+        api.get("/books")
           .then((response) => setBooks(response.data))
           .catch((error) => console.error("error fetching books :", error));
     }, []);
@@ -18,11 +18,7 @@ export default function Books(){
     // Function to handle adding book to library
     const onAddToLibrary = (bookId) => {
         const token = localStorage.getItem("token");  // assuming JWT token
-        axios.post(`http://localhost:8080/api/library/add/${bookId}`, null, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        api.post(`/library/add/${bookId}`)
         .then(() => alert("Book added to library!"))
         .catch(err => {
             const msg = err.response?.data || "Failed to add book to library";
@@ -32,14 +28,15 @@ export default function Books(){
 
     // render list of searched books
     const handleSearch = () => {
-         if (!name.trim()) {
-            axios.get("http://localhost:8080/api/books")
+        const query = name.trim()
+         if (!query) {
+            api.get("/books")
                 .then(res => setBooks(res.data))
                 .catch(err => console.error(err));
             return;
         }
 
-        axios.get(`http://localhost:8080/api/books/search/${name}`)
+        api.get(`/books/search/${query}`)
         .then(response => {
             setBooks(response.data)
         }).catch(error => {

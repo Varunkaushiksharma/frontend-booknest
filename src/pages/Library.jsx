@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios"
 import Navbar from "../component/Navbar";
 import BookCard from "../component/BookCard";
 import './Library.css';  // use this new CSS
@@ -15,9 +15,7 @@ export default function Library() {
 
   const fetchLibraryBooks = () => {
     const token = localStorage.getItem("token");
-    axios.get("http://localhost:8080/api/library/my", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    api.get("/library/my")
     .then((res) => {
       const books = res.data.map((entry) => entry.book);
       setLibraryBooks(books);
@@ -40,9 +38,7 @@ export default function Library() {
 
   const onRemoveFromLibrary = (bookId) => {
     const token = localStorage.getItem("token");
-    axios.delete(`http://localhost:8080/api/library/remove/${bookId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    api.delete(`/library/remove/${bookId}`)
     .then(() => {
       alert("Book removed from library");
       fetchLibraryBooks();

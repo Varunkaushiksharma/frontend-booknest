@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import './Account.css'
 import Button from "../component/Button";
@@ -26,9 +26,7 @@ export default function Account() {
     }
 
     // Fetch user info
-    axios.get("http://localhost:8080/api/users/me", {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+    api.get("/users/me")
     .then(res => setUser(res.data))
     .catch(() => {
         localStorage.removeItem("token");
@@ -41,10 +39,9 @@ export default function Account() {
   }, [token]);
 
   const fetchBooks = () => {
-    axios.get("http://localhost:8080/api/books/my", {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(res => setBooks(res.data))
-      .catch(err => console.error(err));
+    api.get("/books/my")
+       .then(res => setBooks(res.data))
+       .catch(err => console.error(err));
   };
 
   const handleLogout = () => {
@@ -55,11 +52,11 @@ export default function Account() {
 
   const handleDeleteBook = (id) => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
-    axios.delete(`http://localhost:8080/api/books/${id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(() => {
-      setBooks(books.filter(book => book.id !== id));
-    }).catch(() => alert("Failed to delete book"));
+        api.delete(`/books/${id}`)
+        .then(() => {
+          setBooks(books.filter(book => book.id !== id));
+        })
+        .catch(() => alert("Failed to delete book"));
   };
 
     const startEditBook = (book) => {
@@ -98,12 +95,11 @@ export default function Account() {
     imageData.append("file", formData.image);
 
     try {
-      const uploadRes = await axios.post(
-        "http://localhost:8080/api/books/upload",
+      const uploadRes = await api.post(
+        "/books/upload",
         imageData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
           },
         }
@@ -126,15 +122,11 @@ export default function Account() {
 
   try {
     if (editingBook) {
-      await axios.put(
-        `http://localhost:8080/api/books/${editingBook.id}`,
-        bookData,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await api.put(
+        `/books/${editingBook.id}`,
+        bookData);
     } else {
-      await axios.post("http://localhost:8080/api/books", bookData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.post("/books", bookData);
     }
     fetchBooks();
     cancelEdit();
@@ -158,11 +150,11 @@ export default function Account() {
       <form onSubmit={handleSubmit} className="book-form">
           {formData.imageUrl && (
             <div className="image-preview">
-              <img
-                src={formData.imageUrl}
-                alt="Book preview"
-                className="preview-img"
-              />
+             <img
+              src={`${import.meta.env.VITE_API_BASE_URL}${formData.imageUrl}`}
+              alt="Book preview"
+              className="preview-img"
+            />
             </div>
           )}
 
