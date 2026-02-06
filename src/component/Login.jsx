@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import api from "../api/axios";
 import "./login.css";
 
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8080/api/users/login", credentials);
+      const res = await api.post("/users/login", credentials);
 
       const token = res.data.token;
 

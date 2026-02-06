@@ -1,4 +1,4 @@
-import axios from "axios"
+import api from "../api/axios"
 import { useState , useEffect } from "react"
 import React from "react"
 import BookCard from "../component/BookCard"
@@ -10,7 +10,7 @@ export default function TrySearchFeature() {
     const[books,setbooks] = useState([])
 
     const handleSearch = () => {
-        axios.get(`http://localhost:8080/api/books/search/${name}`)
+        api.get(`/books/search/${name}`)
         .then(response => {
             setbooks(response.data)
         }).catch(error => {

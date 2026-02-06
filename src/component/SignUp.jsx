@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from 'axios'
+import api from "../api/axios";
 import "./signup.css";
 
 function SignUp() {
@@ -26,8 +26,8 @@ function SignUp() {
   e.preventDefault();
 
   try {
-    const response = await axios.post(
-      "http://localhost:8080/api/users/signup",
+    const response = await api.post(
+      "/users/signup",
       formData
     );
 
