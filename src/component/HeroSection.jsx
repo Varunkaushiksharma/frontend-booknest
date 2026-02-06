@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    api.get("/home")
+    api.get("/books")
       .then(res => setBooks(res.data))
       .catch(err => console.error(err));
   }, []);
