@@ -9,11 +9,23 @@ export default function Books(){
     const [books, setBooks] = useState([]);
     const[name,setname] = useState("")
 
-    useEffect(() => {
-        api.get("/books")
-          .then((response) => setBooks(response.data))
-          .catch((error) => console.error("error fetching books :", error));
-    }, []);
+   useEffect(() => {
+  api.get("/books")
+    .then((response) => {
+      // 🔐 ensure it's an array
+      if (Array.isArray(response.data)) {
+        setBooks(response.data);
+      } else {
+        console.error("Books API did not return an array:", response.data);
+        setBooks([]);
+      }
+    })
+    .catch((error) => {
+      console.error("error fetching books :", error);
+      setBooks([]);
+    });
+}, []);
+
 
     // Function to handle adding book to library
     const onAddToLibrary = (bookId) => {
@@ -63,7 +75,7 @@ export default function Books(){
 
                 </div>
                 <div className="books">
-                    {books.map((book) => (
+                    {Array.isArray(books) && books.map((book) => (
                        <BookCard
                             key={book.id}
                             book={book}

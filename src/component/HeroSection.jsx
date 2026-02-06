@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import { Link } from "react-router-dom";
 import FeaturedBooks from "./FeatureBook";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/home")
+    api.get("/home")
       .then(res => setBooks(res.data))
       .catch(err => console.error(err));
   }, []);
