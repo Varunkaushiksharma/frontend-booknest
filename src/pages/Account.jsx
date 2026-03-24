@@ -135,6 +135,7 @@ export default function Account() {
     alert("Failed to save book");
   }
 };
+const baseUrl = "http://localhost:8080/api";
 
  return (
    <>
@@ -151,7 +152,7 @@ export default function Account() {
           {formData.imageUrl && (
             <div className="image-preview">
              <img
-              src={`${import.meta.env.VITE_API_BASE_URL.replace('/api','')}${formData.imageUrl}`}
+              src={`${baseUrl}${formData.imageUrl}`}
               alt="Book preview"
               className="preview-img"
             />
@@ -188,7 +189,7 @@ export default function Account() {
           />
 
           <div className="form-buttons">
-            <Button name={editingBook ? "Update" : "Add"} />
+            <Button type="submit" name={editingBook ? "Update" : "Add"} />
             {editingBook && (
               <Button
                 type="button"

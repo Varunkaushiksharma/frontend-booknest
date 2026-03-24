@@ -1,82 +1,107 @@
 .book-card {
   width: 250px;
-  height: 320px; /* fixed height */
+  height: 340px;
   background-color: #ffffff;
-  color: #000000;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   margin: 10px;
   display: flex;
   flex-direction: column;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.25);
 }
 
+/* IMAGE AREA */
 .book-cover {
   width: 100%;
-  height: 110px;
+  height: 130px;
   object-fit: cover;
-  border-bottom: 1px solid #444;
 }
 
+/* INFO AREA */
 .book-info {
-  padding: 8px 10px 10px;
-  flex: 1;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
+/* TITLE */
 .book-name {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin: 0 0 4px 0;
-  color: #fff;
-}
+  margin: 4px 0 2px 0;
+  color: #222;
 
-.book-author {
-  font-size: 0.85rem;
-  color: #bbb;
-  font-style: italic;
-  margin: 0 0 6px 0;
-}
-
-.book-summary {
-  font-size: 0.85rem;
-  color: #ccc;
-  line-height: 1.3;
-  margin-bottom: 8px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* limit summary to 4 lines */
-  line-clamp: 4; /* standard property for compatibility */
-  -webkit-box-orient: vertical;
+  /* force single line */
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal;
 }
 
+/* AUTHOR */
+.book-author {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* DESCRIPTION */
+.book-summary {
+  font-size: 0.8rem;
+  color: #444;
+  line-height: 1.3;
+  margin-bottom: 10px;
+
+  /* force exactly 2 lines space */
+  height: calc(1.3em * 2);
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* BUTTON AREA */
 .button-group {
-  display: flex;
-  justify-content: space-between; /* side by side with space */
-  gap: 6px;
   margin-top: auto;
+  display: flex;
+  gap: 6px;
 }
 
+/* BUTTONS */
 .button-group button,
 .button-group a.read-more-link {
   flex: 1;
-  background-color: #28a745; /* green theme */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.85rem;
   padding: 6px 0;
-  cursor: pointer;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
   text-align: center;
+  cursor: pointer;
   text-decoration: none;
-  user-select: none;
-  transition: background-color 0.3s ease;
+  color: white;
 }
 
+/* READ BUTTON */
+.read-more-link {
+  background-color: #28a745;
+}
+
+/* ADD BUTTON */
+.add-library-btn {
+  background-color: #28a745;
+}
+
+/* HOVER EFFECT */
 .button-group button:hover,
 .button-group a.read-more-link:hover {
-  background-color: #1e7e34; /* darker green on hover */
+  opacity: 0.9;
 }

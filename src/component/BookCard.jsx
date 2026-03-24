@@ -15,12 +15,14 @@ export default function BookCard({
   showDeleteButton = false
 }) {
    // Build correct image URL
+  const baseUrl = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api").replace("/api","");
   const imageUrl = book.imageUrl
-    ? `${import.meta.env.VITE_API_BASE_URL.replace('/api','')}${book.imageUrl}`
-    : defaultImage;
+  ? `${baseUrl}${encodeURI(book.imageUrl)}`
+  : defaultImage;
   return (
     <div className="book-card">
    <img
+      className="book-cover"
       src={imageUrl}
       alt={book.name}
       onError={(e) => e.target.src = defaultImage}

@@ -8,7 +8,7 @@ import Library from "./pages/Library"
 import Books from "./pages/Books"
 import Read from "./pages/Read";
 import Account from "./pages/Account";
-import TrySearchFeature from "./pages/TrySearchFeature";
+// import TrySearchFeature from "./pages/TrySearchFeature";
 import NewHome from "./pages/NewHome";
 
 
@@ -49,10 +49,6 @@ const router = createBrowserRouter(
     {
       path:"/account",
       element: <Account/>
-    },
-    {
-      path:"/trysearch",
-      element: <TrySearchFeature/>
     }
   ]
 )
